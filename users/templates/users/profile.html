@@ -1,0 +1,16 @@
+{% extends "quize/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="user-info-profile">
+        <h3>{{user.username}}</h3>
+            <p class='text-muted'>{{user.email}}
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">some info</li>
+                    <li class="list-group-item list-group-item-light">last quize</li>
+                    <li class="list-group-item list-group-item-light">etc</li>
+                </ul>
+            </p>
+    </div>
+    {% else %}
+    {% endif %}
+{% endblock content %}

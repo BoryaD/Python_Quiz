@@ -1,0 +1,170 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+  
+  ul {
+    margin: 0;
+  }
+  
+  .bg-steel {
+    background-color: #5f788a;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+  
+  .user-info {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    /* margin-left: 70%; */
+    text-align: center;
+  }
+
+  .content-section{
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+  
+  .justify-content-start {
+    /* margin: center; */
+    /* display: table; */
+    margin: 0 auto;
+    margin-bottom:  30px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    font-size: 180%;
+  }
+
+  .container-about {
+    border: 3px solid green;
+    text-align: center;
+    margin: 0 auto;     
+  }
+
+  .coll-about {
+    /* border: 3px solid rgb(255, 8, 0); */
+    text-align: center;
+    margin: 0 auto;   
+  }
+  
+  .raw {
+    text-align: center;
+    margin: 0 auto;   
+    /* border: 3px solid rgb(97, 204, 26); */
+  }
+  
+  .row-about {
+    text-align: center;
+    /* border: 3px solid green; */
+    margin: 0 auto;   
+  }
+
+  .about-head {
+    text-align: center;
+    /* border: 3px solid rgb(255, 8, 0); */
+    margin: 0 auto;   
+  }
+
+  .head-about {
+    font-size: 250%;
+  }
+
+  .head-about-sub {
+    font-size: 200%;
+  }
+
+  .text-about {
+    font-size: 100%;
+  }
+
+  .list-quizes {
+
+    text-align: left;
+    /* border: 3px solid rgb(255, 8, 0); */
+  }
+  .list-quize {
+    margin-top: 3%;
+    border: 1px solid #428bca;
+    background: #ffffff;
+  }
+
+  .user-info-profile {
+    background: #ffffff;
+    border-radius: 1%;
+    text-align: center;
+  }
+
+  .quize-view {
+    /* border: 1px solid #428bca; */
+    margin-left: 1%;
+  }
+  
