@@ -1,23 +1,27 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Quize, Enigma, Option
+from .models import Quiz, Riddle, Option
+
 
 def home(request):
 	context = {
-		'quizes' : Quize.objects.all()	 
+		'quizes': Quiz.objects.all()
 	}
-	return render(request,'quize/home.html', context)
+	return render(request, 'quiz/home.html', context)
+
 
 def rules(request):
-	return render(request,'quize/rules.html',{'title':'Rules'})
+	return render(request, 'quiz/rules.html', {'title': 'Rules'})
+
 
 def about(request):
-	return render(request,'quize/about.html',{'title':'About'})
+	return render(request, 'quiz/about.html', {'title': 'About'})
+
 
 def enigma(request):
 	context = {
-		'enigmas' : Enigma.objects.all(),
-		'options' : Option.objects.all(),
-		'title':'Enigma'
+		'enigmas': Riddle.objects.all(),
+		'options': Option.objects.all(),
+		'title': 'Enigma'
 	}
-	return render(request,'quize/enigma.html',context)
+	return render(request, 'quiz/enigma.html', context)

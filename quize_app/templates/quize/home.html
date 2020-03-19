@@ -1,36 +1,21 @@
-{% extends "quize/base.html" %}
+{% extends "quiz/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-{% comment %} <p>
-</p> {% endcomment %}
-    {% comment %} </div> {% endcomment %}
-    {% comment %} <div class="col-md-4"> {% endcomment %}
-    {% comment %} <table> {% endcomment %}
-    <div class="list-quizes">
-            {% for quize in quizes %}
-                <div class="list-quize">
-                    
-                    <h1 class="quize-view"><a href="{% url 'quize-enigma' %}"> {{quize.title}} </a> </h1>
-                   
-                    <p class="quize-view">By {{quize.author}} on {{quize.date_posted}}</p>
-                    <p class="quize-view">{{quize.content}}</p>
-                </div>
-            {% endfor %}
+    <div class="content-section">
+        <form method="GET">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Question</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <input type = "text" name="answer">
+
+                <button class="btn btn-outline-info" type="submit">Check</button>
+
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{% url 'users-register' %}">Sign Up Now</a>
+            </small>
+        </div>
     </div>
-        {% comment %} </td> {% endcomment %}
-        {% comment %} <td class="list-quizes">
-            {% if user.is_authenticated %}
-            <div class="user-info">
-                <h3>Name</h3>
-                    <p class='text-muted'>{{user.email}}
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">{{user.username}}</li>
-                            <li class="list-group-item list-group-item-light">last quize score</li>
-                            <li class="list-group-item list-group-item-light">money</li>
-                        </ul>
-                    </p>
-            </div>
-            {% else %}
-            {% endif %}
-        </td>
-    </table> {% endcomment %}
 {% endblock content %}

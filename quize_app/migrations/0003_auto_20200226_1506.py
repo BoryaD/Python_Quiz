@@ -7,12 +7,12 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quize_app', '0002_auto_20200226_1502'),
+        ('quiz_app', '0002_auto_20200226_1502'),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='quize',
+            model_name='quiz',
             name='quize_type',
         ),
         migrations.CreateModel(
@@ -21,12 +21,12 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.CharField(max_length=255)),
                 ('quize_type', models.IntegerField(default=0)),
-                ('quize', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quize_app.Quize')),
+                ('quiz', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quiz_app.Quize')),
             ],
         ),
         migrations.AlterField(
             model_name='option',
-            name='quize',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quize_app.Enigma'),
+            name='quiz',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quiz_app.Enigma'),
         ),
     ]

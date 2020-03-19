@@ -7,17 +7,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quize_app', '0001_initial'),
+        ('quiz_app', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='quize',
+            model_name='quiz',
             name='quize_type',
             field=models.IntegerField(default=0),
         ),
         migrations.AlterField(
-            model_name='quize',
+            model_name='quiz',
             name='title',
             field=models.CharField(max_length=255),
         ),
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.CharField(max_length=255)),
                 ('correct', models.BooleanField(default=False)),
-                ('quize', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quize_app.Quize')),
+                ('quiz', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quiz_app.Quize')),
             ],
         ),
     ]
