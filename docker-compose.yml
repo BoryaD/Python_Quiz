@@ -16,7 +16,9 @@ services:
       - ./docker/app.env
 
   redis:
-    image: "redis:2.8"
+    build:
+      dockerfile: docker/Dockerfile.redis
+      context: ./
     ports:
     - 6379:6379
 

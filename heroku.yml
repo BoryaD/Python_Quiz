@@ -1,7 +1,7 @@
 build:
   docker:
-    web: docker/Dockerfile.app
-release:
-  image: web
+    app: docker/Dockerfile.app
+    postgres: docker/Dockerfile.postgres
+    redis: docker/Dockerfile.redis
   command:
     - django-admin migrate --noinput
