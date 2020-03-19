@@ -14,15 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from django.conf.urls import include
-from users import views as users_views
-from quiz_app import views as quize_views
-from django.contrib.auth import views as auth_views
+from quize_app.views import QuizListView
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', quize_views.home),
-    path('quiz/', include('quiz_app.urls')),
+    path('', QuizListView.as_view()),
+    path('home/', include('quize_app.urls')),
     path('login/', include('users.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

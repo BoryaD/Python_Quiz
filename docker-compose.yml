@@ -11,8 +11,14 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     links:
       - postgres
+      - redis
     env_file:
       - ./docker/app.env
+
+  redis:
+    image: "redis:2.8"
+    ports:
+    - 6379:6379
 
   postgres:
     build:

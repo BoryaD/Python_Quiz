@@ -1,49 +1,109 @@
 {% extends "quize/base.html" %}
-{% block content %}
-{% block javascript %}
-<script>
-    /*
-        On submiting the form, send the POST ajax
-        request to server and after successfull submission
-        display the object.
-    */
-    $("#friend-form").submit(function (e) {
-        // preventing from page reload and default actions
-        e.preventDefault();
-        // serialize the data for sending the form data.
-        var serializedData = $(this).serialize();
-        // make POST ajax call
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'post_friend' %}",
-            data: serializedData,
-            success: function (response) {
-                // on successfull creating object
-                // 1. clear the form.
-                $("#friend-form").trigger('reset');
-                // 2. focus to nickname input
-                $("#id_nick_name").focus();
 
-                // display the newly friend to table.
-                var instance = JSON.parse(response["instance"]);
-                var fields = instance[0]["fields"];
-                $("#my_friends tbody").prepend(
-                    `<tr>
-                    <td>${fields["nick_name"]||""}</td>
-                    <td>${fields["first_name"]||""}</td>
-                    <td>${fields["last_name"]||""}</td>
-                    <td>${fields["likes"]||""}</td>
-                    <td>${fields["dob"]||""}</td>
-                    <td>${fields["lives_in"]||""}</td>
-                    </tr>`
-                )
-            },
-            error: function (response) {
-                // alert the error if any error occured
-                alert(response["responseJSON"]["error"]);
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="col-md-12">
+            <form action="">
+                <fieldset class="form-group">
+                    <legend class="" id="question">{{ text }}</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <input class="button-len" id="answer" type="text" size="100%"/>
+                <input id="check-answer-submit" type="button" value="Check"/>
+            </form>
+
+    <div>
+        <br/>
+    </div>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="col-md-12">
+                <div class="content-section">
+                    <h3>Chat</h3>
+                    <div class="chat-section" id="chat-log"> </div><br/>
+                    <input class="button-len" id="chat-message-input" type="text" size="98%"/>
+                    <input id="chat-message-submit" type="button" value="Send"/>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+        <script>
+            var chatSocket = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws/chat/');
+
+            chatSocket.onmessage = function (e) {
+                var data = JSON.parse(e.data);
+                var message = data['message'];
+                var username = data['username'];
+                var users_id = data['user_id']
+
+                if(message !== "")
+                {
+                document.querySelector('#chat-log').innerHTML +="<p><a href='"+ "/login/profile/" + users_id + "'>"
+                    + username +"</a>: " + message + "</p>" ;
+                var messageBody = document.querySelector('#chat-log');
+                messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+                }
+            };
+
+            chatSocket.onclose = function (e) {
+                console.error('Chat socket closed unexpectedly');
+            };
+
+            document.querySelector('#chat-message-input').focus();
+            document.querySelector('#chat-message-input').onkeyup = function (e) {
+                if (e.keyCode === 13) {  // enter, return
+                    document.querySelector('#chat-message-submit').click();
+                }
+            };
+
+            document.querySelector('#chat-message-submit').onclick = function (e) {
+                var messageInputDom = document.querySelector('#chat-message-input');
+                var message = messageInputDom.value;
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                }));
+
+                messageInputDom.value = '';
+            };
+
+        </script>
+    {% endif %}
+
+        <script>
+
+            document.querySelector('#check-answer-submit').onclick = function (e) {
+                var answer = document.querySelector('#answer').value;
+                $(document).ready(function () {
+                    $.ajax({
+                        url: `/home/quiz/check?id={{ cur_question }}&answer=${answer}`,
+                        dataType: 'json',
+                        success: function (data) {
+                            $('#ans').html(data.text);
+                            setTimeout(function(){ $('#ans').html(""); }, 1000);
+                        }
+                    });
+                });
+            };
+            function now() {
+                new Date().getTime();
             }
-        })
-    })
-</script>
-{% endblock javascript %}
+
+            $(document).ready(function () {
+                const request = () => $.ajax({
+
+                    url: `/home/quiz/refresh/?id={{ cur_question }}&time=${new Date().getTime()}`,
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#question').html(data.text);
+                    }
+                });
+                setInterval(request, 1000);
+            });
+        </script>
 {% endblock content %}

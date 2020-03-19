@@ -37,12 +37,10 @@ ul {
 }
 
 .chat-section {
-    width:150px;
-    height:150px;
-    line-height:3em;
+    width:100%;
+    height:500px;
     overflow:scroll;
-    padding:5px;
-    border:1px solid #DEBB07;
+    word-wrap: break-word;
 }
 
 .article-title {
@@ -86,6 +84,10 @@ a.article-title:hover {
   width: 125px;
   margin-right: 20px;
   margin-bottom: 16px;
+}
+
+.button-len {
+word-wrap: break-word;
 }
 
 .account-heading {

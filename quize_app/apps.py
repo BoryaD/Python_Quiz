@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class QuizeAppConfig(AppConfig):
-    name = 'quiz_app'
+    name = 'quize_app'
